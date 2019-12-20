@@ -15,13 +15,8 @@
       p.background(myp5.random(255), myp5.random(255), myp5.random(255));
     };
 
-    function changeColor(x) {
-      asdf = x;
-      console.log("HEJ");
-    }
-
     p.draw = function() {
-      p.stroke(color.r, color.g, color.b);
+      p.stroke(color);
       p.strokeWeight(30);
       if (p.mouseIsPressed) {
         p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
@@ -40,13 +35,13 @@
     socket = io.connect("http://localhost:3000");
 
     socket.on("data", data => {
-      myp5.stroke(data.color.r, data.color.g, data.color.b);
+      myp5.stroke(data.color);
       myp5.line(data.mouseX, data.mouseY, data.pmouseX, data.pmouseY);
     });
 
     myp5 = new p5(sketch, document.getElementById("sketch-holder"));
 
-    color = { r: myp5.random(255), g: myp5.random(255), b: myp5.random(255) };
+    color = "#FFFFFF";
   });
 
   onDestroy(async () => {
@@ -56,7 +51,9 @@
   function add() {
     myp5.background(myp5.random(255), myp5.random(255), myp5.random(255));
     myp5.canvas;
-    color = { r: myp5.random(255), g: myp5.random(255), b: myp5.random(255) };
+  }
+  function changeColor(x) {
+    color = x.target.value;
   }
 </script>
 
@@ -76,7 +73,11 @@
 
 <main>
   <div class="drawing">
-    <div>Test</div>
+    <input
+      on:change={e => changeColor(e)}
+      type="color"
+      name="favcolor"
+      value="#FFFFFF" />
     <div id="sketch-holder" />
   </div>
   <button on:click={add}>Change background</button>
