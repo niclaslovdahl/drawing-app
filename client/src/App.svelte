@@ -7,17 +7,21 @@
   let myp5;
   let socket;
 
-  let sketch = function(p) {
-    let x = 100;
-    let y = 100;
+  let color;
 
+  let sketch = function(p) {
     p.setup = function() {
       p.createCanvas(700, 410);
       p.background(myp5.random(255), myp5.random(255), myp5.random(255));
     };
 
+    function changeColor(x) {
+      asdf = x;
+      console.log("HEJ");
+    }
+
     p.draw = function() {
-      p.stroke(255);
+      p.stroke(color.r, color.g, color.b);
       p.strokeWeight(30);
       if (p.mouseIsPressed) {
         p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
@@ -39,6 +43,8 @@
     });
 
     myp5 = new p5(sketch, document.getElementById("sketch-holder"));
+
+    color = { r: myp5.random(255), g: myp5.random(255), b: myp5.random(255) };
   });
 
   onDestroy(async () => {
@@ -48,6 +54,7 @@
   function add() {
     myp5.background(myp5.random(255), myp5.random(255), myp5.random(255));
     myp5.canvas;
+    color = { r: myp5.random(255), g: myp5.random(255), b: myp5.random(255) };
   }
 </script>
 
@@ -59,9 +66,16 @@
     align-items: center;
     flex-direction: column;
   }
+  .drawing {
+    display: flex;
+    flex-direction: row;
+  }
 </style>
 
 <main>
-  <div id="sketch-holder" />
+  <div class="drawing">
+    <div>Test</div>
+    <div id="sketch-holder" />
+  </div>
   <button on:click={add}>Change background</button>
 </main>
