@@ -30,6 +30,7 @@
           mouseY: p.mouseY,
           pmouseX: p.pmouseX,
           pmouseY: p.pmouseY,
+          color: color,
         });
       }
     };
@@ -39,6 +40,7 @@
     socket = io.connect("http://localhost:3000");
 
     socket.on("data", data => {
+      myp5.stroke(data.color.r, data.color.g, data.color.b);
       myp5.line(data.mouseX, data.mouseY, data.pmouseX, data.pmouseY);
     });
 
