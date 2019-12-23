@@ -4,6 +4,8 @@
 
   import { onMount, onDestroy } from "svelte";
 
+  import Toolbar from "./components/Toolbar.svelte";
+
   let myp5;
   let socket;
 
@@ -73,11 +75,7 @@
 
 <main>
   <div class="drawing">
-    <input
-      on:change={e => changeColor(e)}
-      type="color"
-      name="favcolor"
-      value="#FFFFFF" />
+    <Toolbar {changeColor} />
     <div id="sketch-holder" />
   </div>
   <button on:click={add}>Change background</button>
