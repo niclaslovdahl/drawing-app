@@ -8,4 +8,4 @@ WORKDIR /app
 COPY package.json ./app
 RUN yarn install --production=true --frozen-lockfile --silent
 COPY . /app
-CMD ["yarn", "start"]
+CMD ["yarn", "start:production"]
