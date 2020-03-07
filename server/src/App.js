@@ -2,6 +2,14 @@ let app = require("express")();
 let http = require("http").Server(app);
 let io = require("socket.io")(http);
 
+if (process.env.NODE_ENV === "development") {
+  // eslint-disable-next-line global-require
+  require("dotenv").config({
+    path: ".env",
+    silent: true,
+  });
+}
+
 io.on("connection", socket => {
   console.log("user connected");
 
@@ -15,6 +23,7 @@ io.on("connection", socket => {
   });
 });
 
-http.listen(3000, () => {
-  console.log("started on port 3000");
+const port = process.env.PORT;
+http.listen(port, () => {
+  console.log(`🚀 Server started on port ${port}`);
 });
