@@ -4,7 +4,10 @@ ENV NODE_ENV="production"
 ENV PORT="3000"
 
 WORKDIR /app
-COPY package.json /app
+COPY ./server/package.json /app
 RUN yarn install --production=true --frozen-lockfile --silent
-COPY . /app
+COPY ./server /app
+
+EXPOSE $PORT
+
 CMD ["yarn", "start:production"]
