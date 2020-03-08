@@ -1,7 +1,6 @@
 FROM node:12.16.1-slim
 
 ENV NODE_ENV="production"
-ENV LOG_LEVEL="warn"
 ENV PORT="3000"
 
 WORKDIR /app
